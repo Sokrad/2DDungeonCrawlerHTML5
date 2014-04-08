@@ -17,8 +17,8 @@ function init()
 	}	
 	
 	//Init Canvas
-	background_canvas = document.getElementById('background_canvas');
-	backround_ctx = main_canvas.getContext('2d');
+	//background_canvas = document.getElementById('background_canvas');
+	//backround_ctx = main_canvas.getContext('2d');
 	main_canvas = document.getElementById('main_canvas');
 	main_ctx = main_canvas.getContext('2d');
 	
@@ -26,16 +26,16 @@ function init()
 	document.addEventListener("keydown", key_down, false);
 	
 	requestaframe = (function() {
-                return window.requestAnimationFrame     ||
-                  window.webkitRequestAnimationFrame    ||
-                  window.mozReuestAnimationFrame        ||
-                  window.oRequestAnimationFrame         ||
-                  window.msRequestAnimationFrame        ||
-                  function (callback) {
-                    window.setTimeout(callback, 1000 / 60)
-                  };
+					return window.requestAnimationFrame     	||
+						window.webkitRequestAnimationFrame    	||
+						window.mozReuestAnimationFrame        	||
+						window.oRequestAnimationFrame         	||
+						window.msRequestAnimationFrame        	||
+						function (callback) {
+							window.setTimeout(callback, 1000 / 60)
+					};
 	})();
-	
+		
 	//Create new Player
 	player = new Player();
 	
@@ -56,13 +56,14 @@ function mouse(e)
 //GameLoop
 function gameLoop()
 {
-	clear();	
+	clear();
+	
 	gameUpdate();
 	gameDraw();
 	
 	
 	if(isPlaying)
-		window.setTimeout(gameLoop,10);
+		requestaframe(gameLoop);
 }
 
 function gameUpdate()
@@ -141,8 +142,8 @@ function Player()
 }
 Player.prototype.draw = function()
 {
-  main_ctx.fillStyle = "red";
-  main_ctx.fillRect(this.drawX,this.drawY,50,50);
+  this.game.main_ctx.fillStyle = "red";
+  this.game.main_ctx.fillRect(this.drawX,this.drawY,50,50);
 };
 Player.prototype.update = function()
 {
