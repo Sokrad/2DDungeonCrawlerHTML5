@@ -22,6 +22,18 @@ function init()
 	//Input Events Init
 	document.addEventListener("keydown", key_down, false);
 	
+	requestaframe = (function() {
+                return window.requestAnimationFrame     ||
+                  window.webkitRequestAnimationFrame    ||
+                  window.mozReuestAnimationFrame        ||
+                  window.oRequestAnimationFrame         ||
+                  window.msRequestAnimationFrame        ||
+                  function (callback) {
+                    window.setTimeout(callback, 1000 / 60)
+                  };
+	})();
+	
+	player = new Player();
 }
 
 // Debug Mausposition
@@ -37,10 +49,9 @@ function mouse(e)
 //GameLoop
 function gameLoop()
 {
-	clear();
+	clear();	
 	
-	main_ctx.fillStyle = "red";
-	main_ctx.fillRect(10,10,50,50);
+	player.draw();
 	
 	if(isPlaying)
 		window.setTimeout(gameLoop,10);
@@ -72,9 +83,46 @@ function clear()
 function key_down(e)
 {
   var key_id = e.keyCode || e.which;
-  if (key_id == 40) //down key_down
+  if (key_id == 40) //down key
   {
-    r_y++;
+    player.is_downkey = true;
     e.preventDefault();
   }
+  if (key_id == 38) //up key
+  {
+    player.is_upkey = true;
+    e.preventDefault();
+  }
+  if (key_id == 37) //left key
+  {
+    player.is_leftkey = true;
+    e.preventDefault();
+  }
+  if (key_id == 39) //right key
+  {
+    player.is_rightkey = true;
+    e.preventDefault();
+  }
+}
+
+function Player()
+{
+  this.drawX = 0;
+  this.drawY = 0;
+  this.speed = 1;
+  this.is_downkey = false;
+  this.is_upkey = false;
+  this.is_leftkey = false;
+  this.is_rightkey = false;
+}
+Player.prototype.draw = function()
+{
+  this.check_keys();
+  main_ctx.fillStyle = "red";
+  main_ctx.fillRect(this.drawX,this.drawY,50,50);
+};
+Player.prototype.check_keys = function()
+{
+  if (this.is_downkey == true)
+    this.drawY++;
 }
