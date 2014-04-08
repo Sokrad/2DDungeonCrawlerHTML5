@@ -3,6 +3,9 @@ var version ='0.0.1';
 var debug = true;
 var isPlaying = false;
 
+// GameObject-Array
+var gameObjects = new Array();
+
 init();
 
 function init()
@@ -33,7 +36,11 @@ function init()
                   };
 	})();
 	
+	//Create new Player
 	player = new Player();
+	
+	//Add Player To Draw and Update array
+	gameObjects.push(player);
 }
 
 // Debug Mausposition
@@ -50,11 +57,28 @@ function mouse(e)
 function gameLoop()
 {
 	clear();	
+	gameUpdate();
+	gameDraw();
 	
-	player.draw();
 	
 	if(isPlaying)
 		window.setTimeout(gameLoop,10);
+}
+
+function gameUpdate()
+{
+	for(var i = 0;i<gameObjects.length;i++)
+	{
+		gameObjects[i].update();
+	}
+}
+
+function gameDraw()
+{
+	for(var i = 0;i<gameObjects.length;i++)
+	{
+		gameObjects[i].draw();
+	}
 }
 
 //GameLoop Toggle Funktion
@@ -117,12 +141,15 @@ function Player()
 }
 Player.prototype.draw = function()
 {
-  this.check_keys();
   main_ctx.fillStyle = "red";
   main_ctx.fillRect(this.drawX,this.drawY,50,50);
+};
+Player.prototype.update = function()
+{
+  this.check_keys();  
 };
 Player.prototype.check_keys = function()
 {
   if (this.is_downkey == true)
     this.drawY++;
-}
+};
