@@ -63,11 +63,8 @@ function gameLoop()
 	
 	
 	if(isPlaying)
-<<<<<<< HEAD
 		requestaframe(gameLoop);
-=======
-		requestaframe(loop);
->>>>>>> 46d5e6e8b7d2096a826a31af8fa96f835c55e72d
+
 }
 
 function gameUpdate()
