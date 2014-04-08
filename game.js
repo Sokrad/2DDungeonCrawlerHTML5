@@ -143,8 +143,8 @@ function Player()
 }
 Player.prototype.draw = function()
 {
-  this.game.main_ctx.fillStyle = "red";
-  this.game.main_ctx.fillRect(this.drawX,this.drawY,50,50);
+  main_ctx.fillStyle = "red";
+  main_ctx.fillRect(this.drawX,this.drawY,50,50);
 };
 Player.prototype.update = function()
 {
