@@ -56,13 +56,14 @@ function mouse(e)
 //GameLoop
 function gameLoop()
 {
-	clear();	
+	clear();
+	
 	gameUpdate();
 	gameDraw();
 	
 	
 	if(isPlaying)
-		window.setTimeout(gameLoop,10);
+		requestaframe(loop);
 }
 
 function gameUpdate()
