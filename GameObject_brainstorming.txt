@@ -1,0 +1,24 @@
+Player
+ + Level
+	- EXP
+ + MainStat
+ + HP
+	- HP per Round
+ o Skill
+ 
+Enemy
+ + KI
+  + Range
+	- Destroy Player on Side
+ + HP
+ + Attack
+ 
+Map
+ + Blocks (32x32) 21x15 
+ + Enemys
+ + Player
+ + GameLogic
+
+GameInfos
+ - Floor #
+ - Mobs on Floor
