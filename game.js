@@ -23,8 +23,6 @@ function init()
 	main_canvas = document.getElementById('main_canvas');
 	main_ctx = main_canvas.getContext('2d');
 	
-	//Input Events Init
-
 	
 	requestaframe = (function() {
 					return window.requestAnimationFrame     	||
@@ -88,6 +86,15 @@ function gameDraw()
 	}
 }
 
+// Reseten der Canvas
+function clear()
+{
+	main_ctx.clearRect(0,0,800,600);
+}
+
+
+//Input Manager
+
 //GameLoop Toggle Funktion
 $("#startbtn").click(function toggle_Loop()
 {
@@ -105,15 +112,7 @@ $("#startbtn").click(function toggle_Loop()
 	}
 });
 
-// Reseten der Canvas
-function clear()
-{
-	main_ctx.clearRect(0,0,800,600);
-}
-
-
-//Input Manager
-
+//Key down
 $(document).keydown(function(e){
 
   var key_id = e.keyCode || e.which;
@@ -137,6 +136,8 @@ $(document).keydown(function(e){
     player.is_rightkey = true;
     e.preventDefault();
   }
+  
+  //KeyUp
 }).keyup(function(e) {
 
   var key_id = e.keyCode || e.which;
