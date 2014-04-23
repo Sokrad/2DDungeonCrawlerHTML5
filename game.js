@@ -1,4 +1,4 @@
-var version ='0.0.1';
+$(document).ready(function(){
 
 var debug = true;
 var isPlaying = false;
@@ -59,13 +59,7 @@ function load_media()
 }
 
 // Debug Mausposition
-function mouse(e)
-{
-	var x = e.pageX - document.getElementById('game_object').offsetLeft;
-	var y = e.pageY - document.getElementById('game_object').offsetTop;
-	document.getElementById('x').innerHTML = x;
-	document.getElementById('y').innerHTML = y;
-}
+
 
 
 //GameLoop
@@ -100,7 +94,7 @@ function gameDraw()
 }
 
 //GameLoop Toggle Funktion
-function toggle_Loop()
+$("#startbtn").click(function toggle_Loop()
 {
 	map.draw();
 	
@@ -114,7 +108,7 @@ function toggle_Loop()
 		isPlaying = false;
 		clear();
 	}
-}
+});
 
 // Reseten der Canvas
 function clear()
@@ -232,3 +226,12 @@ Player.prototype.check_keys = function()
 		this.drawX--;
 };
 
+});
+
+function mouse(e)
+{
+	var x = e.pageX - document.getElementById('game_object').offsetLeft;
+	var y = e.pageY - document.getElementById('game_object').offsetTop;
+	document.getElementById('x').innerHTML = x;
+	document.getElementById('y').innerHTML = y;
+}
