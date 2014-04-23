@@ -24,8 +24,7 @@ function init()
 	main_ctx = main_canvas.getContext('2d');
 	
 	//Input Events Init
-	document.addEventListener("keydown", key_down, false);
-	document.addEventListener("keyup", key_up, false);
+
 	
 	requestaframe = (function() {
 					return window.requestAnimationFrame     	||
@@ -57,10 +56,6 @@ function load_media()
 {
 	map.block_sprite.src = 'image/floor_sprite.png';  
 }
-
-// Debug Mausposition
-
-
 
 //GameLoop
 function gameLoop()
@@ -118,8 +113,9 @@ function clear()
 
 
 //Input Manager
-function key_down(e)
-{
+
+$(document).keydown(function(e){
+
   var key_id = e.keyCode || e.which;
   if (key_id == 40) //down key
   {
@@ -141,10 +137,8 @@ function key_down(e)
     player.is_rightkey = true;
     e.preventDefault();
   }
-}
+}).keyup(function(e) {
 
-function key_up(e)
-{
   var key_id = e.keyCode || e.which;
   if (key_id == 40) //down key
   {
@@ -166,7 +160,7 @@ function key_up(e)
     player.is_rightkey = false;
     e.preventDefault();
   }
-}
+});
 
 // Map Prototype
 function Map()
@@ -228,6 +222,7 @@ Player.prototype.check_keys = function()
 
 });
 
+// Debug Mausposition
 function mouse(e)
 {
 	var x = e.pageX - document.getElementById('game_object').offsetLeft;
@@ -235,3 +230,5 @@ function mouse(e)
 	document.getElementById('x').innerHTML = x;
 	document.getElementById('y').innerHTML = y;
 }
+
+//$(document).keypress(function(e) { alert(e.which)});
